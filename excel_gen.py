@@ -721,9 +721,10 @@ def _inject_filter_formula(xlsx_path, sheet_name, formula):
                     # 패턴: <c r="A7" ...><v>...__FILTER_FORMULA__...</v></c>
                     # → <c r="A7" t="str"><f>IFERROR(FILTER(...))</f></c>
                     # inlineStr / shared / 일반 등 모든 타입의 A7 셀 교체
+                    safe_formula = formula.replace("&", "&amp;")
                     xml = re.sub(
                         r'<c r="A7"[^>]*(?:/>|>.*?</c>)',
-                        f'<c r="A7"><f>{formula}</f></c>',
+                        f'<c r="A7"><f>{safe_formula}</f></c>',
                         xml,
                         flags=re.DOTALL
                     )
@@ -819,9 +820,11 @@ def _fix_formula_encoding(xlsx_path):
     tmp = xlsx_path + ".tmp"
 
     def decode_entities_in_formulas(xml_text):
-        # <f>...</f> 블록 내의 &#숫자; 엔티티만 디코딩
+        # <f>...</f> 블록 내의 &#숫자; 숫자형 엔티티만 디코딩 (한글 복원)
+        # &amp; 등 XML 예약 엔티티는 건드리지 않음 (건드리면 XML 깨짐)
         def replacer(m):
-            return "<f>" + html.unescape(m.group(1)) + "</f>"
+            content = re.sub(r'&#(\d+);', lambda x: chr(int(x.group(1))), m.group(1))
+            return "<f>" + content + "</f>"
         return re.sub(r'<f>(.*?)</f>', replacer, xml_text, flags=re.DOTALL)
 
     with zipfile.ZipFile(xlsx_path, "r") as zin:
