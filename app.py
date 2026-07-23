@@ -23,8 +23,14 @@ st.set_page_config(
     layout="wide",
 )
 
-st.title("📊 별도매출현황 자동생성")
-st.caption("FI시스템 원장 파일을 업로드하면 별도매출현황.xlsx를 자동 생성합니다.")
+st.markdown("""
+<style>
+[data-testid="stSidebar"] { min-width: 550px; max-width: 550px; }
+</style>
+""", unsafe_allow_html=True)
+
+st.title("거래처별 매출 현황 자동 정리")
+st.markdown('<p style="color:gray; font-size:16px;">FI시스템 원장 파일 업로드시, &lt;별도-매출 현황&gt; 엑셀 파일을 자동 생성합니다.</p>', unsafe_allow_html=True)
 
 # ── 세션 상태 초기화 ──────────────────────────────────────────────
 if "extra_map"        not in st.session_state: st.session_state.extra_map        = {}
@@ -35,10 +41,11 @@ if "custom_base_path" not in st.session_state: st.session_state.custom_base_path
 
 
 # ── STEP 1: 파일 업로드 ───────────────────────────────────────────
-st.header("① 파일 업로드", divider="blue")
+st.subheader("📁 파일 업로드", divider="blue")
 
 # 1-A. 기존 별도매출현황 ──────────────────────────────────────────
-st.subheader("(별도)매출현황 파일")
+st.subheader("📊 보고서 파일")
+st.caption("＜별도-매출 현황＞ 엑셀 파일 업로드")
 
 if st.session_state.use_default_base:
     try:
@@ -63,7 +70,7 @@ if st.session_state.use_default_base:
             st.rerun()
 else:
     prev_file = st.file_uploader(
-        "(별도)매출현황 파일 업로드 (선택)",
+        "＜별도-매출 현황＞ 엑셀 파일 업로드",
         type=["xlsx"],
         key="prev_upload",
         help="직전 갱신한 별도매출현황 파일을 업로드하면 Raw_Data에 신규 데이터를 누적합니다."
@@ -92,7 +99,8 @@ else:
 st.divider()
 
 # 1-B. 신규 원장 파일 ─────────────────────────────────────────────
-st.subheader("원장 파일 (FI시스템 추출본)")
+st.subheader("📄 원장 파일 (FI시스템 추출본)")
+st.caption("FI시스템 계정별원장 엑셀 파일 업로드 (복수 선택 가능)")
 grid_files = st.file_uploader(
     "원장 파일 업로드 (복수 선택 가능)",
     type=["xlsx"],
@@ -181,7 +189,7 @@ if st.session_state.step >= 2 and st.session_state.raw_df is not None:
     unmapped = find_unmapped_vendors(raw_df)
 
     if unmapped:
-        st.header("② 신규 거래처 분류", divider="orange")
+        st.subheader("신규 거래처 분류", divider="orange")
 
         new_vendors   = [r for r in unmapped if r[3] == "미분류"]
         check_vendors = [r for r in unmapped if r[3] == "확인필요"]
@@ -259,7 +267,7 @@ if st.session_state.step >= 2 and st.session_state.raw_df is not None:
 
 # ── STEP 3: Excel 생성 및 다운로드 ───────────────────────────────
 if st.session_state.step >= 3 and st.session_state.raw_df is not None:
-    st.header("③ Excel 생성 및 다운로드", divider="green")
+    st.subheader("Excel 생성 및 다운로드", divider="green")
 
     raw_df = apply_mapping(
         st.session_state.raw_df.drop(
@@ -356,10 +364,11 @@ with st.sidebar:
 
 **① 원장 파일 업로드**
 - 경로: FI시스템 → 계정별원장
-- 조건: 회계일(당분기), 계정(컨텐츠제공수익·용역수익·기타수익)
+- 조건: 회계일(당분기)
+- 계정: 컨텐츠제공수익·용역수익·기타수익
 - 엑셀 다운로드 후 업로드
 
-**② (별도)매출현황 업로드**
+**② 보고서 파일 업로드**
 - 직전 작성 파일 업로드
 - <span style="color:#E8820C;">※ 기본 파일 해제 후 신규 파일 업로드할 것</span>
 
