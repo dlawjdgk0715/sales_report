@@ -4,7 +4,7 @@
   ※작성 후, 손익계산서 수치와 교차 검증 필요.
 
 ## 접속 링크
-https://salesreport-d4qpfk9jkcn932q47xblyb.streamlit.app/
+[https://salesreport-d4qpfk9jkcn932q47xblyb.streamlit.app/](https://salesreport-d4qpfk9jkcn932q47xblyb.streamlit.app/)
 
 ## 활용 방법
 - 자금수지 작성, 손익 분석
