@@ -288,7 +288,7 @@ if st.session_state.step >= 3 and st.session_state.raw_df is not None:
             row_order = [r for r in ["게임매출","용역수익","기타수익"] if r in pivot.index]
             pivot = pivot.reindex(row_order)
             pivot["합계"] = pivot.sum(axis=1)
-            pivot_display = pivot.applymap(lambda x: f"{x:,.0f}")
+            pivot_display = pivot.map(lambda x: f"{x:,.0f}")
             st.dataframe(pivot_display, use_container_width=True)
 
     # 파일명
