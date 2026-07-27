@@ -47,7 +47,7 @@ VENDOR_MAP = {
         "Facebook, Inc.":                                            ("Facebook",         "광고", ""),
         "Admob":                                                     ("Admob",            "광고", ""),
         "Line Corporation":                                          ("Line",             "광고", ""),
-        "주식회사 넵튠":                                              ("넵튠",             "광고", "← 애드엑스플러스 사명 변경 (23.11), 러쉬 Xsolla 정산"),
+        "주식회사 넵튠":                                              ("넵튠",             "광고", "← 애드엑스플러스 사명 변경 (23.11)"),
         # OOTP
         "Out of the park Developments GmbH & Co.KG(OOTP)":          ("OOTP",             "OOTP", "← OOTP 관련(추정손익 파일상 기타매출로 분류)"),
         # ── 적요 기반 분류 거래처는 NOTE_SUB_RULES 참조 ──────────────
