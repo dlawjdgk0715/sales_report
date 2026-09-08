@@ -16,7 +16,7 @@ ACCOUNT_LABEL = {
 }
 
 # 거래처별 요약 시트에 표시할 주요 게임매출 거래처 (순서 유지)
-TOP_GAME_VENDORS = ["애플", "구글", "원스토어", "Valve", "Huawei", "케이씨피", "Beijing Raymobile"]
+TOP_GAME_VENDORS = ["애플", "구글", "원스토어", "Valve", "Huawei", "케이씨피", "Beijing Raymobile", "SOFT-WORLD", "Xsolla"]
 
 VENDOR_MAP = {
     # ── 게임매출 (4100100) ────────────────────────────────────────
@@ -34,7 +34,7 @@ VENDOR_MAP = {
         "(주)밸로프(VALOFE Co., Ltd)":                               ("밸로프",           "모바일", ""),
         "(주)비바리퍼블리카":                                          ("비바리퍼블리카",    "모바일", ""),
         "주식회사 컴투스홀딩스":                                       ("컴투스홀딩스",     "모바일", "← 제노니아 정산 매출, 크리티카 모바일 정산 매출 (올엠 합병)"),
-        "SOFT-WORLD INT'L CORP.":                                    ("SOFT-WORLD",       "온라인", "← 스타시드 관련 (대만/HK 카드 매출)"),
+        "SOFT-WORLD INT'L CORP.":                                    ("SOFT-WORLD",       "온라인", "← 웹상점 매출 (대만/HK 카드 매출)"),
         "컴투스":                                                    ("컴투스(수익이연)", "모바일", "← K-IFRS 수익이연"),
         # 온라인
         "Valve Corporation":                                         ("Valve",            "온라인", ""),
